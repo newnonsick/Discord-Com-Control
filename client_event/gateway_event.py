@@ -19,6 +19,7 @@ class GatewayEvents(commands.Cog):
                     channel_id = int(file.read().strip())
 
                 channel = self.client.get_channel(channel_id)
+
                 if not isinstance(channel, discord.TextChannel) or not channel:
                     print("⚠️ Channel not found. Please use `/setup` again.")
                     return None
@@ -26,9 +27,9 @@ class GatewayEvents(commands.Cog):
                 return channel
             except ValueError:
                 print("⚠️ Invalid channel ID stored. Please use `/setup` again.")
+                return None
             except Exception as e:
                 print(f"⚠️ Could not read channel ID: {e}")
-            finally:
                 return None
         else:
             print("⚠️ No previous channel ID found. Use `/setup` to create one.")
