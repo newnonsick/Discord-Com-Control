@@ -3,6 +3,7 @@ import os
 
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
 
 from client_event.gateway_event import GatewayEvents
 from slash_commands.setup import Setup
@@ -15,8 +16,10 @@ intents.members = True
 
 client = commands.Bot(command_prefix="n!", intents=intents)
 
+
 async def main():
     async with client:
+        load_dotenv()
         await asyncio.gather(
             client.add_cog(GatewayEvents(client=client)),
             client.add_cog(Setup(client=client)),

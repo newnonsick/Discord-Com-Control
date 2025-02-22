@@ -163,3 +163,4 @@ cython_debug/
 
 channel_id.txt
 message_id.txt
+run.bat

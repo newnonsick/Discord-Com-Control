@@ -75,5 +75,8 @@ class GatewayEvents(commands.Cog):
             return
 
         await self.reloadView()
+        await self.client.change_presence(
+            activity=discord.Game(name="Online alongside New!"),
+        )
 
         print(f"We have logged in as {self.client.user.name}")

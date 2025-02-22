@@ -1,7 +1,8 @@
-import asyncio
 import os
 
 import discord
+from pyautogui import screenshot
+import datetime
 
 
 class SetupView(discord.ui.View):
@@ -28,3 +29,29 @@ class SetupView(discord.ui.View):
     ):
         await interaction.response.send_message("🔒 Locking PC...", ephemeral=True)
         os.system("rundll32.exe user32.dll,LockWorkStation")
+
+    @discord.ui.button(
+        label="Screenshot", style=discord.ButtonStyle.blurple, emoji="📸"
+    )
+    async def screenshot_button(
+        self, interaction: discord.Interaction, button: discord.ui.Button
+    ):
+        try:
+            await interaction.response.defer()
+
+            screenshot_path = f"screenshot_{datetime.datetime.now().timestamp()}.png"
+            img = screenshot()
+            img.save(screenshot_path)
+
+            await interaction.followup.send(
+                file=discord.File(screenshot_path), ephemeral=True
+            )
+
+        except Exception as e:
+            await interaction.followup.send(
+                f"❌ Error taking screenshot: {e}", ephemeral=True
+            )
+
+        finally:
+            if os.path.exists(screenshot_path):
+                os.remove(screenshot_path)

@@ -30,7 +30,8 @@ class Setup(commands.Cog):
                 "⚡ **Manage New's Computer with ease!**\n\n"
                 "🛑 **Shutdown** – Power off safely\n"
                 "🔄 **Restart** – Quick reboot\n"
-                "🔒 **Lock PC** – Secure PC\n\n"
+                "🔒 **Lock PC** – Secure PC\n"
+                "📸 **Screenshot** – Capture the screen\n\n"
                 "✨ *Tap a button below to begin!*"
             ),
             color=discord.Color.magenta(),
