@@ -69,5 +69,5 @@ Discord Com Control is a Discord bot that allows you to remotely control your co
 3. Place the `run.bat` file in the Startup folder. The bot will now run automatically when your computer starts.
 
 ## Preview
-<img src="preview.png" alt="preview" width="300">
+<img src="preview.png" alt="preview" width="700">
 
