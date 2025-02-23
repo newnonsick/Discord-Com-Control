@@ -50,3 +50,7 @@ class Setup(commands.Cog):
                 file.write(str(interaction.channel.id))
         else:
             await interaction.followup.send("🚫 Use this in a text channel!", ephemeral=True)
+
+
+async def setup(client: commands.Bot):
+    await client.add_cog(Setup(client))

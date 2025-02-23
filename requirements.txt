@@ -1,0 +1,4 @@
+discordpy
+pyautogui
+pillow
+python-dotenv

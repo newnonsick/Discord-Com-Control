@@ -80,3 +80,7 @@ class GatewayEvents(commands.Cog):
         )
 
         print(f"We have logged in as {self.client.user.name}")
+
+
+async def setup(client: commands.Bot):
+    await client.add_cog(GatewayEvents(client))

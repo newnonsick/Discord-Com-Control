@@ -1,8 +1,10 @@
+import datetime
 import os
 
 import discord
 from pyautogui import screenshot
-import datetime
+
+from view.confirmationview import ConfirmationView
 
 
 class SetupView(discord.ui.View):
@@ -13,15 +15,21 @@ class SetupView(discord.ui.View):
     async def shutdown_button(
         self, interaction: discord.Interaction, button: discord.ui.Button
     ):
-        await interaction.response.send_message("⚠️ Shutting down...", ephemeral=True)
-        os.system("shutdown /s /t 1")
+        await interaction.response.send_message(
+            "⚠️ Are you sure you want to shut down?",
+            view=ConfirmationView("shutdown"),
+            ephemeral=True,
+        )
 
     @discord.ui.button(label="Restart", style=discord.ButtonStyle.primary, emoji="🔄")
     async def restart_button(
         self, interaction: discord.Interaction, button: discord.ui.Button
     ):
-        await interaction.response.send_message("🔄 Restarting...", ephemeral=True)
-        os.system("shutdown /r /t 1")
+        await interaction.response.send_message(
+            "🔄 Are you sure you want to restart?",
+            view=ConfirmationView("restart"),
+            ephemeral=True,
+        )
 
     @discord.ui.button(label="Lock PC", style=discord.ButtonStyle.secondary, emoji="🔒")
     async def lock_pc_button(
