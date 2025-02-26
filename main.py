@@ -15,7 +15,7 @@ client = commands.Bot(command_prefix="n!", intents=intents)
 
 
 async def load_all_cogs(client: commands.Bot):
-    for folder in ["client_event", "slash_commands"]:  # prefix_commands
+    for folder in ["client_event", "slash_commands", "prefix_commands"]:
         folder_path = f"cogs/{folder}"
         for filename in os.listdir(folder_path):
             if filename.endswith(".py") and filename != "__init__.py":

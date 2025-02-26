@@ -1,10 +1,8 @@
-import os
-
 import discord
 from discord import app_commands
 from discord.ext import commands
 
-from view.setupview import SetupView
+from views.setupview import SetupView
 
 
 class Setup(commands.Cog):
@@ -15,10 +13,11 @@ class Setup(commands.Cog):
     @app_commands.command(
         name="setup", description="Setup the bot for first time usage."
     )
-
     async def setup_command(self, interaction: discord.Interaction):
         if interaction.guild is None:
-            return
+            return await interaction.response.send_message(
+                "🚫 This command can only be used in a server!", ephemeral=True
+            )
 
         await interaction.response.send_message(
             "🎛️ Setting up the **Control Panel**... 🚀", ephemeral=True
@@ -49,7 +48,9 @@ class Setup(commands.Cog):
             with open("channel_id.txt", "w") as file:
                 file.write(str(interaction.channel.id))
         else:
-            await interaction.followup.send("🚫 Use this in a text channel!", ephemeral=True)
+            await interaction.followup.send(
+                "🚫 Use this in a text channel!", ephemeral=True
+            )
 
 
 async def setup(client: commands.Bot):

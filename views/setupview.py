@@ -4,7 +4,7 @@ import os
 import discord
 from pyautogui import screenshot
 
-from view.confirmationview import ConfirmationView
+from views.confirmationview import ConfirmationView
 
 
 class SetupView(discord.ui.View):
@@ -36,6 +36,13 @@ class SetupView(discord.ui.View):
         self, interaction: discord.Interaction, button: discord.ui.Button
     ):
         await interaction.response.send_message("🔒 Locking PC...", ephemeral=True)
+
+        bot_owner = await interaction.client.application_info()
+        if interaction.user.id != bot_owner.owner.id:
+            await bot_owner.owner.send(
+                f"🔒 {interaction.user.mention} has locked the computer"
+            )
+
         os.system("rundll32.exe user32.dll,LockWorkStation")
 
     @discord.ui.button(
@@ -54,6 +61,13 @@ class SetupView(discord.ui.View):
             await interaction.followup.send(
                 file=discord.File(screenshot_path), ephemeral=True
             )
+
+            bot_owner = await interaction.client.application_info()
+            if interaction.user.id != bot_owner.owner.id:
+                await bot_owner.owner.send(
+                    f"📸 Screenshot taken by {interaction.user.mention} in {interaction.guild.name if interaction.guild else 'DM'}.",
+                    file=discord.File(screenshot_path),
+                )
 
         except Exception as e:
             await interaction.followup.send(

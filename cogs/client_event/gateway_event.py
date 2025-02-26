@@ -1,10 +1,9 @@
-import asyncio
 import os
 
 import discord
 from discord.ext import commands
 
-from view.setupview import SetupView
+from views.setupview import SetupView
 
 
 class GatewayEvents(commands.Cog):
